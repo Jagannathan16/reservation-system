@@ -1,6 +1,7 @@
 package com.example.reservation.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -23,19 +24,21 @@ import java.util.List;
 @AllArgsConstructor
 public class Ticket {
     @Id
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId id;
     private LocalDateTime bookedDateTime;
-    private LocalDateTime travelDateTime;
+    private LocalDate travelDateTime;
     private double amount;
     private String source;
     private String destination;
     private int[] seatNumbers;
     private TicketStatus status;
     private List<Traveller> travellers;
+    @JsonIgnore
     @DBRef(lazy = true)
     private Bus bus;
     @DBRef(lazy = true)
+    @JsonIgnore
     private User user;
-//    @DBRef
-//    private Payment payment;
 }

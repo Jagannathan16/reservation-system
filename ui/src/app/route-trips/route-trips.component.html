@@ -1,0 +1,27 @@
+<mat-card *ngIf="trips.length !== 0">
+  <div *ngFor="let trip of trips">
+    <mat-card>
+      <mat-grid-list cols="6" rowHeight="4:1">
+        <mat-grid-tile>{{ trip.id }}</mat-grid-tile>
+        <mat-grid-tile>
+          {{ trip.depTime }}
+          -
+          {{ trip.arrTime }}
+        </mat-grid-tile>
+        <mat-grid-tile>{{ trip.name }}</mat-grid-tile>
+        <mat-grid-tile>{{ seats }}</mat-grid-tile>
+        <mat-grid-tile>{{ trip.price | currency: 'INR' }}</mat-grid-tile>
+        <mat-grid-tile>
+          <button
+            (click)="viewSeats(trip.id, trip.reservedSeats)"
+            mat-raised-button
+            color="primary"
+          >
+            View Seats
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card>
+    <br />
+  </div>
+</mat-card>
